@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct RelayanceApp: App {
+    @State private var clientsViewModel = ClientsViewModel(clients: ModelData.chargement("Source.json"))
     var body: some Scene {
         WindowGroup {
             ListClientsView()
+                .environment(clientsViewModel)
         }
     }
 }

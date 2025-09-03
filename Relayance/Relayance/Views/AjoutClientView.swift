@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AjoutClientView: View {
+    @Environment(ClientsViewModel.self) private var clientsViewModel
+
     @Binding var dismissModal: Bool
     @State var nom: String = ""
     @State var email: String = ""
@@ -25,7 +27,11 @@ struct AjoutClientView: View {
                 .font(.title2)
             Button("Ajouter") {
                 //Ajout d'un client
-                dismissModal.toggle()
+                if clientsViewModel.addClient(name: nom, email: email) {
+                    dismissModal.toggle()
+                } else {
+                    print("Not valid") // create alert
+                }
             }
             .padding(.horizontal, 50)
             .padding(.vertical)
