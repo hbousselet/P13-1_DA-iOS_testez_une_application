@@ -9,6 +9,8 @@ import SwiftUI
 
 struct DetailClientView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(ClientsViewModel.self) private var clientsViewModel
+
     var client: Client
     
     var body: some View {
@@ -31,8 +33,11 @@ struct DetailClientView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Supprimer") {
-                    // suppression
-                    self.presentationMode.wrappedValue.dismiss()
+                    if clientsViewModel.delete(client) {
+                        self.presentationMode.wrappedValue.dismiss()
+                    } else {
+                        print("Error mettre une UIAlert plutôt")
+                    }
                 }
                 .foregroundStyle(.red)
                 .bold()

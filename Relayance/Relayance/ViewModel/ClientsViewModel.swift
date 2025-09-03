@@ -24,6 +24,13 @@ import SwiftUI
         }
     }
     
+    func delete(_ client: Client) -> Bool {
+        if let index = clients.firstIndex(of: client) {
+            clients.remove(at: index)
+        }
+        return !client.clientExiste(clientsList: clients)
+    }
+    
     private func isEmpty(_ name: String) -> Bool {
         return name.isEmpty
     }
