@@ -15,6 +15,17 @@ extension Date {
         return isoDateFormatter.date(from: isoString)
     }
     
+    static func stringGoodFormatFromDate(_ date: Date) -> String? {
+        let dateFormatter = DateFormatter()
+
+        // Définis le format de sortie
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+
+        let dateString = dateFormatter.string(from: date)
+        return dateString
+    }
+    
     static func stringFromDate(_ date: Date) -> String? {
         let isoDateFormatter = DateFormatter()
         isoDateFormatter.dateFormat = "dd-MM-yyyy"
