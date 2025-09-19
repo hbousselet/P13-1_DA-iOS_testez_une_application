@@ -36,8 +36,6 @@ final class ClientTests: XCTestCase {
         
         XCTAssert(newClient.nom == "Dupont")
         XCTAssert(newClient.email == "paul.dupont@gmail.com")
-//        XCTAssert(newClient.dateCreation == Date.now) ne marche pas, il doit se jouer une seconde ou quelques ms
-        // ou bien rajouter un interval ?
     }
     
     func testIsNewClient() throws {
@@ -75,7 +73,16 @@ final class ClientTests: XCTestCase {
     func testClientFormatDateToStringWithWrongDate() throws {
         let client = Client(nom: "Merland",
                             email: "pierre@merland.com",
-                            dateCreationString: "")
+                            dateCreationString: "1999-12-31T14:07:00Z")
+        
+        XCTAssert(client.formatDateVersString() == "1999-12-31T14:07:00Z")
+    }
+    
+    func testClientCreationDateNow() throws {
+        let client = Client(nom: "Merland",
+                            email: "pierre@merland.com",
+                            dateCreationString: "1999-1Z")
+        
         XCTAssert(client.formatDateVersString() == Date.stringFromDate(Date.now))
     }
     

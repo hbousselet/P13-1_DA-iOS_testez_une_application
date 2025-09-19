@@ -25,6 +25,10 @@ import SwiftUI
     }
     
     func delete(_ client: Client) -> Bool {
+        if !client.clientExiste(clientsList: clients) {
+            return false
+        }
+        
         if let index = clients.firstIndex(of: client) {
             clients.remove(at: index)
         }

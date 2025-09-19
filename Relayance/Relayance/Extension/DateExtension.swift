@@ -17,8 +17,6 @@ extension Date {
     
     static func stringGoodFormatFromDate(_ date: Date) -> String? {
         let dateFormatter = DateFormatter()
-
-        // Définis le format de sortie
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
 
@@ -30,6 +28,9 @@ extension Date {
         let isoDateFormatter = DateFormatter()
         isoDateFormatter.dateFormat = "dd-MM-yyyy"
         
+        if date.timeIntervalSince1970 < 946684800 { // timestamp of the creation date of the application 1st january 2000
+            return nil
+        }
         return isoDateFormatter.string(from: date)
     }
     
